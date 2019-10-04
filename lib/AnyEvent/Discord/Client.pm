@@ -2,7 +2,7 @@ package AnyEvent::Discord::Client;
 use warnings;
 use strict;
 
-our $VERSION = '0.000001';
+our $VERSION = '0.000002';
 $VERSION = eval $VERSION;
 
 use AnyEvent::WebSocket::Client;
@@ -310,6 +310,8 @@ AnyEvent::Discord::Client - A Discord client library for the AnyEvent framework.
 =head1 SYNOPSIS
 
     use AnyEvent::Discord::Client;
+
+    my $token = 'NjI5NTQ4Mjg3NTMxMjg2......';
     
     my $bot = new AnyEvent::Discord::Client(
       token => $token,
@@ -332,12 +334,16 @@ AnyEvent::Discord::Client - A Discord client library for the AnyEvent framework.
     $bot->connect();
     AnyEvent->condvar->recv;
 
-=head DESCRIPTION
+After adding this bot to a channel in a Discord Guild, type '!hello' in chat to run the example command.
+
+=head1 DESCRIPTION
 
 This module provides the functionality required to create a simple Discord
 client or bot using the REST and WebSocket interfaces to Discord.
 
 =head1 CONSTRUCTION
+
+=over
 
 =item C<< AnyEvent::Discord::Client->new(I<%opts>) >>
 
@@ -434,7 +440,7 @@ Invokes the Discord API asynchronously and returns immediately.  C<$method> is t
 
 Invokes the Discord API synchronously and returns the result of the call.  C<$method> is the HTTP method to use; C<$path> is the endpoint to call.  If C<$data> is a reference, it is sent as JSON; otherwise, if it is defined, it is sent as a C<x-www-form-urlencoded> body. Returns C<undef> on failure. On success, returns the decoded JSON result if the response type is C<application/json> or C<1> otherwise.
 
-=item C<websocket_send(I<$op>, I<$d>)
+=item C<websocket_send(I<$op>, I<$d>)>
 
 Sends a raw WebSocket payload as per the L<Discord Gateway|https://discordapp.com/developers/docs/topics/gateway> documentation.
 
