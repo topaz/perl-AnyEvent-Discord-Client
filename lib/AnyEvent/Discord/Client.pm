@@ -111,7 +111,7 @@ my %event_handler = (
     #print STDERR join(",",unpack("U*", $msg->{content}))."\n";
     return if $msg->{author}{id} == $self->{user}{id};
 
-    if ($msg->{content} =~ /^\Q$self->{prefix}\E(\S+)(?:\s+(.*?))?\s*$/ || $msg->{content} =~ /^\s*(.*?)\s*$/) {
+    if ($msg->{content} =~ /^\Q$self->{prefix}\E(\S+)(?:\s+(.*?))?\s*$/) {
       my ($cmd, $args) = (lc $1, defined $2 ? $2 : "");
       if (exists $self->{commands}{$cmd}) {
         $self->{commands}{$cmd}($self, $args, $msg, $channel, $guild);
