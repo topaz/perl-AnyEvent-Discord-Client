@@ -12,6 +12,7 @@ use URI;
 use HTTP::Request;
 use HTTP::Headers;
 use AnyEvent::HTTP;
+use Data::Dumper;
 
 my $debug = 0;
 
