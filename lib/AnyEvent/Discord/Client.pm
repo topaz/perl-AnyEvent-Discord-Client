@@ -6,6 +6,7 @@ our $VERSION = '0.000002';
 $VERSION = eval $VERSION;
 
 use AnyEvent::WebSocket::Client;
+use Mozilla::CA; 
 use LWP::UserAgent;
 use JSON;
 use URI;
@@ -139,7 +140,7 @@ sub connect {
   $self->{reconnect_delay} *= 2;
   $self->{reconnect_delay} = 5*60 if $self->{reconnect_delay} > 5*60;
 
-  $self->{websocket} = AnyEvent::WebSocket::Client->new(max_payload_size => 1024*1024);
+  $self->{websocket} = AnyEvent::WebSocket::Client->new(ssl_ca_file=> Mozilla::CA::SSL_ca_file(), max_payload_size => 1024*1024);
   $self->{websocket}->connect($self->{gateway})->cb(sub {
     $self->{conn} = eval { shift->recv };
     if($@) {
